@@ -9,5 +9,5 @@ define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 // Market data API keys
-define('FINNHUB_API_KEY', 'd31oqrpr01qsprr1uv90d31oqrpr01qsprr1uv9g');
+define('FINNHUB_API_KEY', 'YOUR_KEY_HERE');
 define('ALPHAVANTAGE_API_KEY', 'YOUR_KEY_HERE');
