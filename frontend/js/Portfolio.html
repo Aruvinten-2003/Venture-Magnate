@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Venture Magnate | Portfolio</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #0D0D0D;
+        color: #E0E0E0;
+        margin: 0;
+    }
+
+    /* ===== Navigation Bar ===== */
+    nav {
+        background-color: #111111;
+        padding: 15px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .logo {
+        color: #00FF88;
+        font-weight: 600;
+        font-size: 22px;
+        letter-spacing: 1px;
+    }
+
+    .nav-links a {
+        color: #E0E0E0;
+        text-decoration: none;
+        margin-left: 25px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+    color: #00FF88;
+    }
+
+    /* ===== Dashboard Content ===== */
+    .portfolio-container {
+        padding: 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .card {
+        background-color: #1C1C1C;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .balance-card h2 {
+        color: #00FF88;
+        margin-bottom: 10px;
+    }
+
+    .balance-amount {
+        font-size: 36px;
+        font-weight: 600;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        color: #00FF88;
+        border-bottom: 2px solid #00FF88;
+    }
+
+    tr:nth-child(even) {
+        background-color: #2B2B2B;
+    }
+
+    .profit { color: #00FF88; }
+    .loss   { color: #E74C3C; }
+
+    .chart-card h3 { color: #00FF88; }
+
+    canvas {
+        background-color: #1A1A1A;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .chart-card {
+        grid-column: span 2;
+    }
+
+    footer {
+        background-color: #111111;
+        color: #888888;
+        text-align: center;
+        padding: 15px;
+        font-size: 13px;
+        margin-top: 40px;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- ===== Navigation Bar ===== -->
+<nav>
+    <div class="logo">Venture Magnate</div>
+    <div class="nav-links">
+        <a href="Portfolio.html" class="active">Portfolio</a>
+        <a href="trading.html">Trading &amp; Market Data</a>
+    </div>
+</nav>
+
+<!-- ===== Portfolio Content ===== -->
+<div class="portfolio-container">
+
+    <div class="card balance-card">
+    <h2>Your Virtual Balance</h2>
+    <p class="balance-amount" id="cash">$0.00</p>
+    <p>Total Equity: <span id="equity">$0.00</span></p>
+    <p>Keep investing wisely! 🚀</p>
+    </div>
+
+    <div class="card">
+        <h2>Your Portfolio Holdings</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Quantity</th>
+            <th>Avg Price</th>
+            <th>Current Price</th>
+            <th>Market Value</th>
+            <th>P/L</th>
+        </tr>
+        </thead>
+        <tbody id="holdingsBody">
+        <!-- JS will render rows here -->
+        </tbody>
+    </table>
+    </div>
+
+    <div class="card chart-card">
+        <h3>Portfolio Performance (Last 7 Days)</h3>
+        <canvas id="portfolioChart" width="800" height="300"></canvas>
+    </div>
+</div>
+
+<footer>© 2026 Venture Magnate | Investing Simulation Platform</footer>
+
+<!-- ===== Chart.js demo chart (optional) ===== -->
+<script>
+    const ctx = document.getElementById('portfolioChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+            label: 'Portfolio Value ($)',
+            data: [10000, 10400, 10200, 10800, 11000, 11200, 12500],
+            tension: 0.3,
+            fill: true,
+            borderWidth: 2
+        }]
+    },
+    options: {
+        plugins: { legend: { labels: { color: '#E0E0E0' } } },
+        scales: {
+            x: { ticks: { color: '#E0E0E0' }, grid: { color: '#333' } },
+            y: { ticks: { color: '#E0E0E0' }, grid: { color: '#333' } }
+        }
+    }
+    });
+</script>
+
+<!-- ✅ IMPORTANT: Load your scripts ONCE, and at the bottom -->
+<!-- This assumes portfolio.html is inside: /venture-magnate/frontend/ -->
+<script defer src="/venture-magnate/frontend/js/api.js"></script>
+<script defer src="/venture-magnate/frontend/js/portfolio.js"></script>
+
+
+</body>
+</html>

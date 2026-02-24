@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Venture Magnate — Trading & Market Data</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<style>
+:root{--bg:#0d0d0d;--panel:#181818;--panel-2:#141414;--border:#252525;--text:#e8e8e8;--muted:#a0a0a0;--accent:#00ff88;--accent-2:#38ffa6;--danger:#ef5350;--chip:#212121;}
+  *{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);background:var(--bg)}
+.nav{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;background:#111;border-bottom:1px solid var(--border)}
+.brand{color:var(--accent);font-weight:700;letter-spacing:.3px}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{color:#cfcfcf;text-decoration:none;font-weight:500}
+.nav-links a.active{color:var(--accent)}
+.profile{position:relative;margin-left:10px}
+.profile-btn{background:#1a1a1a;border:1px solid var(--border);color:#cfcfcf;padding:8px 10px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.avatar{width:18px;height:18px;border-radius:999px;background:linear-gradient(145deg,#2b2b2b,#1b1b1b);display:inline-block}
+.caret{opacity:.8}
+.menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--panel-2);border:1px solid var(--border);border-radius:10px;min-width:180px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.menu a{display:block;padding:10px 12px;border-radius:8px;color:#d8d8d8;text-decoration:none}
+.menu a:hover{background:#1f1f1f}
+.profile:focus-within .menu,.profile:hover .menu{display:block}
+.wrap{padding:24px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.28)}
+.toolbar{padding:18px;display:grid;grid-template-columns:1fr 160px 160px;gap:14px}
+.input,.select{width:100%;padding:12px 14px;border-radius:10px;background:#121212;color:var(--text);border:1px solid var(--border);outline:none}
+.chart-area{padding:14px 18px 18px}
+.chart-box{background:#101010;border:1px solid var(--border);border-radius:12px;padding:12px}
+.tradebar{display:grid;grid-template-columns:1fr 1fr 340px;gap:16px;padding:18px;border-top:1px solid var(--border)}
+.section-title{font-size:13px;color:var(--muted);margin:0 0 10px}
+.pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill{background:var(--chip);color:#d7d7d7;border:1px solid var(--border);border-radius:999px;padding:8px 14px;font-weight:600;cursor:pointer;-webkit-user-select:none;user-select:none}
+.pill.active{outline:2px solid var(--accent)}
+.pill.buy{color:#0b0b0b;background:var(--accent);border-color:transparent}
+.pill.sell{color:#0b0b0b;background:var(--danger);border-color:transparent}
+.execute{justify-self:end;width:100%;max-width:340px}
+.row{display:grid;grid-template-columns:1fr;gap:10px}
+.btn-primary{width:100%;padding:12px 14px;border-radius:10px;font-weight:800;border:none;cursor:pointer;color:#0b0b0b;background:var(--accent);transition:.2s transform ease,.2s background-color ease}
+.btn-primary:hover{background:var(--accent-2);transform:translateY(-1px)}
+#tradeMsg{font-size:13px;margin-top:6px}
+.execute .section-title{text-align:right;margin-bottom:6px}
+@media (max-width:1100px){.tradebar{grid-template-columns:1fr}.execute{justify-self:stretch;max-width:none}}
+footer{color:#8e8e8e;font-size:13px;padding:22px;text-align:center}
+</style>
+</head>
+<body>
+<header class="nav">
+    <div class="brand">Venture Magnate</div>
+    <nav class="nav-links">
+        <a href="Portfolio.html">Portfolio</a>
+        <a href="#" class="active">Trading &amp; Market Data</a>
+        <div class="profile">
+        <button class="profile-btn" aria-haspopup="menu"><span class="avatar"></span> Aruvinten <span class="caret">▾</span></button>
+        <div class="menu" role="menu">
+        <a href="#">Profile</a>
+        <a href="/venture-magnate/frontend/js/logout.html">Logout</a>
+        
+
+
+        </div>
+    </div>
+    </nav>
+</header>
+
+<main class="wrap">
+    <section class="card">
+        <!-- top toolbar -->
+    <div class="toolbar">
+        <input class="input" id="symbolInput" type="text" placeholder="Symbol (e.g. AAPL or BTCUSDT)" />
+        <select class="select" id="categorySelect" aria-label="Category">
+        <option value="stock" selected>Stock</option>
+        <option value="crypto">Crypto</option>
+        <option value="forex">Forex</option>
+        </select>
+        <select class="select" id="chartTypeSelect" aria-label="Chart Type">
+        <option value="line" selected>Line</option>
+        <option value="candle">Candle</option>
+        <option value="depth">Depth</option>
+        </select>
+    </div>
+
+    <!-- chart -->
+    <div class="chart-area">
+        <div class="chart-box">
+        <canvas id="priceChart" height="280"></canvas>
+        </div>
+    </div>
+
+    <!-- trade controls -->
+    <div class="tradebar">
+        <div>
+        <p class="section-title">Trade Type</p>
+        <div class="pills" id="tradeTypePills">
+            <div class="pill buy active"  data-side="buy"  id="buyPill">Buy</div>
+            <div class="pill sell"        data-side="sell" id="sellPill">Sell</div>
+        </div>
+        </div>
+
+        <div>
+        <p class="section-title">Order Type</p>
+        <div class="pills" id="orderTypePills">
+            <div class="pill active" data-otype="Market" id="marketPill">Market</div>
+            <div class="pill"        data-otype="Limit"  id="limitPill">Limit</div>
+        </div>
+        </div>
+
+        <div class="execute">
+        <p class="section-title">Execute Trade</p>
+        <form id="tradeForm" class="row">
+            <input class="input" id="qtyInput"   type="number" min="0" step="1" placeholder="Enter quantity" required />
+            <input class="input" id="priceInput" type="number" min="0" step="0.0001" placeholder="Auto (Market)" disabled />
+            <button class="btn-primary" id="execBtn" type="submit">Execute Trade</button>
+            <small id="tradeMsg"></small>
+        </form>
+        </div>
+    </div>
+    </section>
+</main>
+
+<footer>© 2026 Venture Magnate</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script defer src="./api.js"></script>
+<script defer src="./trade.js"></script>
+</body>
+</html>

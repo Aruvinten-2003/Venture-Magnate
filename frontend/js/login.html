@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Venture Magnate | Login</title>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #0D0D0D;
+        color: #E0E0E0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .login-card {
+        background-color: #1C1C1C;
+        padding: 40px;
+        border-radius: 12px;
+        width: 360px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        text-align: center;
+    }
+    h1 {
+        color: #00FF88;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .subtitle { color: #B0B0B0; margin-bottom: 25px; font-size: 14px; }
+    .input-group { text-align: left; margin-bottom: 20px; }
+    label { display: block; font-size: 14px; color: #B0B0B0; margin-bottom: 8px; }
+    input {
+        width: 100%; padding: 10px; border-radius: 8px; border: none; outline: none;
+        background-color: #2B2B2B; color: #FFFFFF; font-size: 14px;
+    }
+    input:focus { border: 1px solid #00FF88; background-color: #222222; }
+    button {
+        background-color: #00FF88; color: #000; font-weight: bold; border: none;
+        border-radius: 8px; padding: 12px; width: 100%; cursor: pointer; font-size: 16px;
+    }
+    button:hover { background-color: #00CC6A; }
+
+    .msg {
+        margin: 12px 0 0;
+        font-size: 13px;
+        min-height: 18px;
+        color: #E74C3C; /* error color */
+        text-align: center;
+    }
+
+    .link { margin-top: 15px; font-size: 13px; color: #B0B0B0; }
+    .link a { color: #00FF88; text-decoration: none; }
+    .link a:hover { text-decoration: underline; }
+</style>
+</head>
+
+<body>
+<div class="login-card">
+    <h1>Venture Magnate</h1>
+    <p class="subtitle">Welcome back, investor!</p>
+
+    <!-- IMPORTANT: id must match login.js -->
+    <form id="loginForm" novalidate>
+    <div class="input-group">
+        <label for="email">Email</label>
+        <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+        />
+    </div>
+
+    <div class="input-group">
+        <label for="password">Password</label>
+        <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+        />
+    </div>
+
+    <button type="submit">Login</button>
+
+    <!-- login.js will write errors here -->
+    <p id="loginMsg" class="msg"></p>
+
+    <p class="link">Don’t have an account? <a href="Register.html">Register here</a></p>
+    </form>
+</div>
+
+<script defer src="./api.js"></script>
+<script defer src="./login.js"></script>
+</body>
+</html>

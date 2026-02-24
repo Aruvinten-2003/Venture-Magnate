@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venture Magnate | Logout</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #0D0D0D;
+        color: #E0E0E0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .logout-card {
+        background-color: #1C1C1C;
+        padding: 50px 40px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        max-width: 420px;
+    }
+
+    h1 {
+        color: #00FF88;
+        margin-bottom: 15px;
+        font-size: 26px;
+        letter-spacing: 1px;
+    }
+
+    p {
+        color: #B0B0B0;
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .loader {
+        border: 4px solid #2B2B2B;
+        border-top: 4px solid #00FF88;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 20px auto;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .redirect {
+        color: #B0B0B0;
+        font-size: 13px;
+    }
+
+    a {
+        color: #00FF88;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<div class="logout-card">
+    <div class="loader"></div>
+    <h1>Logout Successful</h1>
+    <p>You have securely signed out of Venture Magnate.</p>
+    <p class="redirect">Redirecting you to <a href="view.html">Login Page</a> in <span id="timer">5</span> seconds…</p>
+</div>
+
+<script>
+    // countdown + redirect
+    let countdown = 5;
+    const timer = document.getElementById('timer');
+    const interval = setInterval(() => {
+        countdown--;
+        timer.textContent = countdown;
+    if (countdown <= 0) {
+        clearInterval(interval);
+        window.location.href = "view.html";
+    }
+    }, 1000);
+</script>
+</body>
+</html>

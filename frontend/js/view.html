@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Venture Magnate | Home</title>
+<style>
+    body{
+        font-family: 'Poppins', sans-serif;
+        background:#0D0D0D; color:#E0E0E0; margin:0
+    }
+    /* Header / Navbar */
+    header{
+        background:#111111; padding:20px 40px;
+        display:flex; justify-content:space-between; align-items:center;
+        box-shadow:0 2px 8px rgba(0,0,0,.5)
+    }
+    .logo{color:#00FF88; font-size:22px; font-weight:600; letter-spacing:1px}
+    nav a{
+    color:#E0E0E0; text-decoration:none; margin:0 15px; font-weight:500; transition:.3s
+    }
+    nav a:hover, nav a.active{color:#00FF88}
+
+    /* Hero */
+    .hero{
+        text-align:center; padding:100px 20px;
+        background:linear-gradient(180deg,#0D0D0D 0%, #1A1A1A 100%);
+    }
+    .hero h1{color:#00FF88; font-size:42px; font-weight:700; margin:0 0 20px}
+    .hero p{
+    color:#B0B0B0; font-size:16px; max-width:650px; margin:0 auto 40px; line-height:1.6
+    }
+    .btn{
+        display:inline-block; background:#00FF88; color:#000; padding:14px 28px;
+        font-size:16px; border-radius:8px; border:none; cursor:pointer; font-weight:700;
+        margin:0 10px; transition:.3s; text-decoration:none
+    }
+    .btn:hover{background:#00CC6A}
+
+    /* About */
+    .about{padding:60px 40px; text-align:center}
+    .about h2{color:#00FF88; margin:0 0 15px}
+    .about p{color:#B0B0B0; max-width:700px; margin:0 auto; font-size:15px; line-height:1.6}
+
+    /* Footer */
+    footer{
+        background:#111111; color:#888; text-align:center; padding:20px; font-size:13px; margin-top:50px;
+    }
+</style>
+</head>
+
+<script>
+(async function () {
+    const url = '/venture-magnate/backend-php/api/prices.php?symbols=AAPL,BTCUSDT,EURUSD';
+
+    const res = await fetch(url);
+    const text = await res.text();
+
+    console.log("STATUS:", res.status);
+    console.log("RAW:", text);
+
+  // If your PHP returns JSON:
+try {
+    const data = JSON.parse(text);
+    console.log("JSON:", data);
+} catch (e) {
+    console.log("Not JSON (maybe PHP warning/HTML).");
+}
+})();
+</script>
+
+
+<body>
+
+<header>
+<div class="logo">Venture Magnate</div>
+<nav aria-label="Primary">
+    <a href="view.html" class="active">Home</a>
+    <a href="login.html">Login</a>
+    <a href="Register.html">Register</a>
+    <!-- If your file is 'Register.html', keep the same case; recommended: use lowercase 'register.html' -->
+</nav>
+</header>
+
+<section class="hero">
+<h1>Empower Your Investment Journey</h1>
+<p>
+    Venture Magnate is a simulated investing platform that helps users learn, analyze, and manage their
+    virtual portfolios with real-time market data integration. Experience trading in a safe, educational
+    environment and monitor your profit/loss trends like a professional investor.
+</p>
+<!-- Change href to 'tutorial.html' if you want Get Started to open your tutorial page -->
+<a href="Tutorial.html" class="btn">Get Started</a>
+<a href="login.html" class="btn">Login</a>
+</section>
+
+<section class="about">
+<h2>About Venture Magnate</h2>
+<p>
+    Venture Magnate combines financial education and technology. It allows users to practice simulated trading,
+    view real-time market prices, and track performance using an interactive dashboard powered by APIs and
+    Chart.js. The goal is to enhance investment literacy through a practical, engaging platform.
+</p>
+</section>
+
+<footer>
+© 2026 Venture Magnate | Learn. Trade. Grow.
+</footer>
+
+</body>
+</html>
